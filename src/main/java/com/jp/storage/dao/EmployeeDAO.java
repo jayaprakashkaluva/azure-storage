@@ -7,6 +7,7 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
 
+import com.jp.storage.constants.StorageConstants;
 import com.jp.storage.entity.Employee;
 import com.jp.storage.util.EmployeeUtil;
 import com.jp.storage.vo.EmployeeVO;
@@ -25,7 +26,7 @@ public class EmployeeDAO {
 		try {
 			// Retrieve storage account from connection-string.
 			Employee employee = EmployeeUtil.toEntity(vo);
-			CloudTable cloudTable = getTable("employeeMaster");
+			CloudTable cloudTable = getTable(StorageConstants.EMPLOYEE_MASTER);
 			// Create an operation to add the new employee to the employee table.
 			employee.setRowKey(UUID.randomUUID().toString());
 			employee.setPartitionKey(vo.getDept());
